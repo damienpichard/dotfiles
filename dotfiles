@@ -1,0 +1,84 @@
+#!/usr/bin/env sh
+
+### dotfiles ---                                                -*- mode: sh; -*-
+
+## Copyright (C) 2021-2023  damienpichard
+
+## Author: damienpichard <damienpichard@tutanota.de>
+
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+### Code:
+
+
+
+
+
+# This script should not be executed often.  Therefore, it seems legit to import
+# our magic functions from GitHub Gists to keep them up-to-date.
+source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/ebb22985000ec8e08c3296483f38229d/raw/assert.sh)"
+source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
+source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
+
+
+
+function print_usage() {
+	printf "Usage: ${TEXT_FORMAT_NOESC_BOLD}dotfiles${TEXT_FORMAT_NOESC_RESET} <${TEXT_FORMAT_NOESC_UNDERLINE}command${TEXT_FORMAT_NOESC_RESET}> [${TEXT_FORMAT_NOESC_UNDERLINE}argument${TEXT_FORMAT_NOESC_RESET}]\n"
+	printf "    commands:\n"
+    printf "        ${TEXT_FORMAT_NOESC_FOREGROUND_MAGENTA}install${TEXT_FORMAT_NOESC_RESET}   ${TEXT_FORMAT_NOESC_FOREGROUND_CYAN}[module]${TEXT_FORMAT_NOESC_RESET}    install ${TEXT_FORMAT_NOESC_BOLD}dotfiles${TEXT_FORMAT_NOESC_RESET} for the specified module\n"
+    printf "        ${TEXT_FORMAT_NOESC_FOREGROUND_MAGENTA}upgrade${TEXT_FORMAT_NOESC_RESET}   ${TEXT_FORMAT_NOESC_FOREGROUND_CYAN}[module]${TEXT_FORMAT_NOESC_RESET}    upgrade ${TEXT_FORMAT_NOESC_BOLD}dotfiles${TEXT_FORMAT_NOESC_RESET} for the specified module\n"
+    printf "        ${TEXT_FORMAT_NOESC_FOREGROUND_MAGENTA}uninstall${TEXT_FORMAT_NOESC_RESET} ${TEXT_FORMAT_NOESC_FOREGROUND_CYAN}[module]${TEXT_FORMAT_NOESC_RESET}    uninstall ${TEXT_FORMAT_NOESC_BOLD}dotfiles${TEXT_FORMAT_NOESC_RESET} for the specified module\n"
+}
+
+
+
+function install {
+	if assert_file_exists "$1/makefile"
+	then
+		make -C "$1" install
+	else
+		print_error "no such file or directory: '$1'"
+		exit 1
+	fi
+}
+
+
+
+function uninstall {
+	if assert_file_exists "$1/makefile"
+	then
+		make -C "$1" uninstall
+	else
+		print_error "no such file or directory: '$1'"
+		exit 1
+	fi
+}
+
+
+
+function main {
+	if assert_eq ${#@} 2
+	then
+		case $1 in
+			install)   install   $2 ;;
+			uninstall) uninstall $2 ;;
+		esac
+	else
+		print_usage
+	fi
+}
+
+
+
+main $@
