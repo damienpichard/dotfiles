@@ -35,3 +35,9 @@ current_dir := $(patsubst %/,%,$(dir $(mkfile_path)))
 .PHONY: install
 install:
 	ln -s ${current_dir}/screenrc ${HOME}/.screenrc
+
+
+
+.PHONY: uninstall
+uninstall:
+	rm ${HOME}/.screenrc
