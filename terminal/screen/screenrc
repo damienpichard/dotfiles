@@ -60,4 +60,4 @@ bind R source ~/.screenrc
 term xterm-256colors
 
 # the following two lines give a two-line status, with the current window highlighted
-hardstatus alwayslastline "%{= w} %H |%{-}%{= W} %-Lw%{= r}%n%f %t%{-}%+Lw %= %{= w}|%{-} %{w}%Y/%m/%d %c:%s"
+hardstatus alwayslastline "%{-}%{= W} %-Lw%{= r}%n%f %t%{-}%+Lw %= %{= w}|%{-} %{w}%Y/%m/%d %c:%s"
