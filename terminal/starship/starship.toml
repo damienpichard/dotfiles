@@ -1,0 +1,256 @@
+### starship.toml ---                                    -*- mode: conf-toml; -*-
+
+## Copyright (C) 2021-2023  damienpichard
+
+## Author: damienpichard <damienpichard@tutanota.de>
+## Keywords:
+
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+
+## You should have received a copy of the GNU General Public License
+## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+### Commentary:
+
+#
+
+### Code:
+
+
+
+# First param ─┌
+[username]
+format = "[╭─$user]($style)@"
+style_user = "bold green"
+style_root = "bold red"
+show_always = true
+
+
+
+# Second param
+[hostname]
+format = "[$hostname]($style) in "
+style = "bold dimmed red"
+trim_at = "-"
+ssh_only = false
+disabled = false
+
+
+
+[character]
+error_symbol               = '[╰─λ](bold red)'
+success_symbol             = '[╰─λ](bold green)'
+vimcmd_symbol              = '[╰─](bold green)'   # currently useless since we use GNU/Bash
+vimcmd_visual_symbol       = '[╰─](bold yellow)'  # currently useless since we use GNU/Bash
+vimcmd_replace_symbol      = '[╰─](bold blue)'    # currently useless since we use GNU/Bash
+vimcmd_replace_one_symbol  = '[╰─](bold purple)'  # currently useless since we use GNU/Bash
+
+
+
+[cmd_duration]
+min_time = 50 # show duration of every non-instantaneous command
+format   = "took [$duration]($style)"
+disabled = false
+
+
+
+[battery]
+full_symbol        = "󱟢"
+charging_symbol    = "󱟦"
+discharging_symbol = "󱟤"
+unknown_symbol     = "󰂑"
+empty_symbol       = "󰂎"
+
+[[battery.display]]
+threshold          = 90
+symbol             = "󰂂"
+style              = "bold green"
+
+[[battery.display]]
+threshold          = 80
+symbol             = "󰂁"
+style              = "bold green"
+
+[[battery.display]]
+threshold          = 70
+symbol             = "󰂀"
+style              = "bold green"
+
+[[battery.display]]
+threshold          = 60
+symbol             = "󰁿"
+style              = "bold yellow"
+
+[[battery.display]]
+threshold          = 50
+symbol             = "󰁾"
+style              = "bold yellow"
+
+[[battery.display]]
+threshold          = 40
+symbol             = "󰁽"
+style              = "bold yellow"
+
+[[battery.display]]
+threshold          = 30
+symbol             = "󰁼"
+style              = "bold yellow"
+
+[[battery.display]]
+threshold          = 20
+symbol             = "󰁻"
+style              = "bold red"
+
+[[battery.display]]
+threshold          = 10
+symbol             = "󰁺"
+style              = "bold red"
+
+[[battery.display]]
+threshold          = 90
+symbol             = "󰂂"
+style              = "bold red"
+
+[[battery.display]]
+threshold          = 90
+symbol             = "󰂂"
+style              = "bold red"
+
+
+
+
+
+
+[directory]
+home_symbol      = "~"
+use_os_path_sep  = true
+truncate_to_repo = true
+truncation_length = 2
+truncation_symbol = '…/'
+read_only        = ' 󰉐'
+read_only_style  = 'bold red'
+
+
+
+[os.symbols]
+Alpine           = " "
+Amazon           = " "
+Android          = " "
+Arch             = " "
+Artix            = " "
+CentOS           = " "
+Debian           = " "
+EndeavourOS      = " "
+Fedora           = " "
+FreeBSD          = " "
+Gentoo           = ""
+Illumos          = " "
+Linux            = " "
+Macos            = ""
+Manjaro          = " "
+Mint             = "󰣭 "
+NixOS            = " "
+OpenBSD          = " "
+openSUSE         = " "
+Pop              = " "
+Redhat           = " "
+RedHatEnterprise = " "
+Solus            = " "
+Ubuntu           = " "
+Unknown          = " "
+Windows          = " "
+
+
+
+[git_status]
+format     = '([$all_status$ahead_behind]($style) )'
+ahead      = ' '
+behind     = ' '
+diverged   = ' '
+conflicted = ' '
+untracked  =' '
+up_to_date = ' '
+modified   =' '
+staged     =' '
+renamed    =' '
+deleted    =' '
+
+
+
+[c]
+symbol = ' '
+style  = 'bold 27'
+
+
+
+[elixir]
+symbol = ' '
+style  = 'bold 98'
+
+
+
+[erlang]
+symbol = ' '
+style  = 'bold red'
+
+
+
+[golang]
+symbol = ' '
+style  = 'bold cyan'
+
+
+
+[haskell]
+symbol = ' '
+style  = 'bold 99'
+
+
+
+[lua]
+symbol = ' '
+style  = 'bold 21'
+
+
+
+[ocaml]
+symbol = ' '
+style  = 'bold 215'
+
+
+
+[perl]
+symbol = ' '
+style  = 'bold 26'
+
+
+
+[python]
+symbol = ' '
+style  = 'bold 11'
+
+
+
+[ruby ]
+symbol = ' '
+style  = 'bold 196'
+
+
+
+[rust]
+symbol = ' '
+style  = 'bold 167'
+
+
+
+[swift]
+symbol = ' '
+style  = 'bold 202'
