@@ -1,6 +1,4 @@
-#!/usr/bin/env sh
-
-### dotfiles ---                                                -*- mode: sh; -*-
+#!/usr/bin/env sh      ### dotfiles ---                         -*- mode: sh; -*-
 
 ## Copyright (C) 2021-2023  damienpichard
 
@@ -25,7 +23,7 @@
 
 
 # This script should not be executed often.  Therefore, it seems legit to import
-# our magic functions from GitHub Gists to keep them up-to-date.
+# our magical functions from GitHub Gists to keep them up-to-date.
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/ebb22985000ec8e08c3296483f38229d/raw/assert.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"

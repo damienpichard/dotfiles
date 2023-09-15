@@ -37,7 +37,7 @@ show_always = true
 
 # Second param
 [hostname]
-format = "[$hostname]($style) in "
+format = "[$hostname]($style):"
 style = "bold dimmed red"
 trim_at = "-"
 ssh_only = false
@@ -114,19 +114,6 @@ threshold          = 10
 symbol             = "󰁺"
 style              = "bold red"
 
-[[battery.display]]
-threshold          = 90
-symbol             = "󰂂"
-style              = "bold red"
-
-[[battery.display]]
-threshold          = 90
-symbol             = "󰂂"
-style              = "bold red"
-
-
-
-
 
 
 [directory]
@@ -171,17 +158,17 @@ Windows          = " "
 
 
 [git_status]
-format     = '([$all_status$ahead_behind]($style) )'
+format     = '[$all_status$ahead_behind]($style)'
 ahead      = ' '
 behind     = ' '
 diverged   = ' '
 conflicted = ' '
-untracked  =' '
+untracked  = ' '
 up_to_date = ' '
-modified   =' '
-staged     =' '
-renamed    =' '
-deleted    =' '
+modified   = ' '
+staged     = ' '
+renamed    = ' '
+deleted    = ' '
 
 
 
