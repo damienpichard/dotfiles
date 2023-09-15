@@ -26,6 +26,100 @@
 
 
 
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$fill\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+
+
+[fill]
+symbol = ' '
+
+
+
 # First param ─┌
 [username]
 format = "[╭─$user]($style)@"
@@ -46,8 +140,8 @@ disabled = false
 
 
 [character]
-error_symbol               = '[╰─λ](bold red)'
-success_symbol             = '[╰─λ](bold green)'
+error_symbol               = '[╰─▶](bold red)'
+success_symbol             = '[╰─▶](bold green)'
 vimcmd_symbol              = '[╰─](bold green)'   # currently useless since we use GNU/Bash
 vimcmd_visual_symbol       = '[╰─](bold yellow)'  # currently useless since we use GNU/Bash
 vimcmd_replace_symbol      = '[╰─](bold blue)'    # currently useless since we use GNU/Bash
@@ -157,8 +251,13 @@ Windows          = " "
 
 
 
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style)"
+
+
+
 [git_status]
-format     = '[$all_status$ahead_behind]($style)'
+format     = ' [$all_status$ahead_behind]($style) '
 ahead      = ' '
 behind     = ' '
 diverged   = ' '
@@ -171,73 +270,90 @@ renamed    = ' '
 deleted    = ' '
 
 
+[package]
+format = " [$symbol$version]($style) | "
+symbol = "󰏓 "
+
+
 
 [c]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 27'
 
 
 
 [elixir]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 98'
 
 
 
 [erlang]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold red'
 
 
 
 [golang]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold cyan'
 
 
 
 [haskell]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 99'
 
 
 
 [lua]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 21'
 
 
 
 [ocaml]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 215'
 
 
 
 [perl]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 26'
 
 
 
 [python]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 11'
 
 
 
-[ruby ]
+[ruby]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 196'
 
 
 
 [rust]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 167'
 
 
 
 [swift]
+format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold 202'
