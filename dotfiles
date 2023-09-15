@@ -24,7 +24,6 @@
 
 
 
-
 # This script should not be executed often.  Therefore, it seems legit to import
 # our magic functions from GitHub Gists to keep them up-to-date.
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/ebb22985000ec8e08c3296483f38229d/raw/assert.sh)"
