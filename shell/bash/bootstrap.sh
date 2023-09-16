@@ -86,5 +86,5 @@ if command_exists starship
 then
     eval "$(starship init bash)"
 else
-    source $SH_DIR/theme/clear.theme.bash
+    source $SH_DIR/themes/clear.theme.bash
 fi
