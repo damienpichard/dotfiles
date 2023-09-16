@@ -78,19 +78,6 @@ done
 
 
 
-# Use `zellij` as default terminal muliplexer.
-# Do not bother the user if `zellij` is not installed.
-# NOTE: One can find zellij configuration in `terminal/zellij`
-#       and install it with `dotfiles install terminal/zellij`.
-if command_exists screen
-then
-    if [[ -z "$STY" ]]; then
-        screen -xRR autoscreen
-    fi
-fi
-
-
-
 # Use `starship` as default shell prompt when installed.
 # When `starship` is not installed, use the ultra-simple `clear` theme.
 # NOTE: One can find startship configuration in `terminal/shartship`
