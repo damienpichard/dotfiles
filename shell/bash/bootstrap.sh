@@ -52,9 +52,9 @@ source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpicha
 # Check if GNU/Bash version is >= $BASH_MINIMUM_VERSION.
 if assert_string_neq "$(printf '%s\n' "${BASH_MINIMUM_VERSION}" "${BASH_VERSION}" | sort -V | head -n1)" "${BASH_MINIMUM_VERSION}"
 then
-    echo "Your are currently using GNU/Bash ${BASH_VERSION%.*}."
-    echo "Unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above."
-    echo "Consider to update GNU/Bash before using this configuration."
+    print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}."
+    print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above."
+    print_error "consider to update GNU/Bash before using this configuration."
     return 1
 fi
 
@@ -71,6 +71,8 @@ do
     elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
     then
         source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
+    else
+        print_warning "no such plugin: '${plugin}'"
     fi
 done
 
