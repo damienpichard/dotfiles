@@ -47,7 +47,7 @@ function generate_password {
 
 
 
-function color_password {
+function colorize_password {
     # Generate and colorize a password of length ${1} or 16 by default.
     while read -n1 character
     do
@@ -63,4 +63,4 @@ function color_password {
 
 
 
-alias passgen=color_password
+alias passgen=colorize_password
