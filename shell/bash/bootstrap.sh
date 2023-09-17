@@ -75,16 +75,3 @@ do
         source "${util}"
     fi
 done
-
-
-
-# Use `starship` as default shell prompt when installed.
-# When `starship` is not installed, use the ultra-simple `clear` theme.
-# NOTE: One can find startship configuration in `terminal/shartship`
-#       and install it with `dotfiles install terminal/starship`.
-if command_exists starship
-then
-    eval "$(starship init bash)"
-else
-    source $SH_DIR/themes/clear.theme.bash
-fi
