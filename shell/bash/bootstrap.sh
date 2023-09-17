@@ -30,6 +30,15 @@
 
 
 
+# Stop here when executing non-interactive scripts.
+# Continue in any GNU/Bash shell.
+case $- in
+  *i*) ;;
+    *) return;;
+esac
+
+
+
 # For now, let's continue to use distant libraries since we do not relaunch
 # shells 100 times per day.
 # NOTE: However, be ready to move these to local if it causes to much problems.
