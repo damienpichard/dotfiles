@@ -25,32 +25,25 @@
 ### Code:
 
 
-BLUE="$TEXT_FORMAT_FOREGROUND_LIGHT_BLUE"
-GRAY="$TEXT_FORMAT_FOREGROUND_DARK_GRAY"
-RESET="$TEXT_FORMAT_RESET"
-
-BOLD_CYAN="$TEXT_FORMAT_BOLD$TEXT_FORMAT_FOREGROUND_LIGHT_CYAN"
-BOLD_MAGENTA="$TEXT_FORMAT_BOLD$TEXT_FORMAT_FOREGROUND_LIGHT_MAGENTA"
-BOLD_GREEN="$TEXT_FORMAT_BOLD$TEXT_FORMAT_FOREGROUND_LIGHT_GREEN"
-BOLD_RED="$TEXT_FORMAT_BOLD$TEXT_FORMAT_FOREGROUND_LIGHT_RED"
 
 SH_THEME_PROMPT="➜ "
 
 
-# https://github.com/Bash-it/bash-it/blob/master/themes/base.theme.bash
+
+# HACK: https://github.com/Bash-it/bash-it/blob/master/themes/base.theme.bash
 function safe_append_prompt_command {
     local prompt_re
 
     # Set OS dependent exact match regular expression.
-    case "${OSTYPE}" in
-        darwin*) prompt_re="[[:<:]]${1}[[:>:]]" ;; # macOS
-        *)       prompt_re="\<${1}\>"           ;; # Linux/FreeBSD/...
+    case $SYSTEM in
+        macos) prompt_re="[[:<:]]${1}[[:>:]]" ;; # macOS
+        *)     prompt_re="\<${1}\>"           ;; # Linux/FreeBSD/...
     esac
 
-    if [[ ${PROMPT_COMMAND[*]:-} =~ ${prompt_re} ]]
+    if expr "${PROMPT_COMMAND[*]:-}" : "${prompt_re}"
     then
       return
-    elif [[ -z ${PROMPT_COMMAND} ]]
+    elif assert_string_empty "${PROMPT_COMMAND}"
     then
       PROMPT_COMMAND="${1}"
     else
@@ -59,18 +52,20 @@ function safe_append_prompt_command {
 }
 
 
-function command_prompt {
 
-    # Store $? result before it get overrided by our functions
+function command_prompt {
     result=$?
 
-    PS1="$BLUE\W$RESET\n"
-
-    (( $result == 0 )) && PS1+="$BOLD_GREEN$SH_THEME_PROMPT" \
-                       || PS1+="$BOLD_RED$SH_THEME_PROMPT"
-    PS1+="$RESET"
-
+    if assert_eq $result 0
+    then
+        PS1="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}\W${TEXT_FORMAT_NOESC_RESET}\n"
+        PS1+="${TEXT_FORMAT_BOLD}${TEXT_FORMAT_FOREGROUND_LIGHT_GREEN}${SH_THEME_PROMPT}${TEXT_FORMAT_NOESC_RESET} "
+    else
+        PS1="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}\W${TEXT_FORMAT_NOESC_RESET}\n"
+        PS1+="${TEXT_FORMAT_BOLD}${TEXT_FORMAT_FOREGROUND_LIGHT_RED}${SH_THEME_PROMPT}${TEXT_FORMAT_NOESC_RESET} "
+    fi
 }
+
 
 
 safe_append_prompt_command command_prompt
