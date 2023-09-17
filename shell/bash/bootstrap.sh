@@ -56,23 +56,23 @@ fi
 #       own external tools.  Therefore, there will be not much plugins.
 for plugin in ${SH_PLUGINS[*]}
 do
-    if assert_file_exists $SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash
+    if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
     then
-        source $SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash
-    elif assert_file_exists $SH_DIR/plugins/${plugin}/${plugin}.plugin.bash
+        source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
+    elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
     then
-        source $SH_DIR/plugins/${plugin}/${plugin}.plugin.bash
+        source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
     fi
 done
 
 
 
 # Load all the *.bash configuration file in utils/
-for util in $SH_DIR/utils/*.util.bash
+for util in "$SH_DIR/utils/*.util.bash"
 do
-    if assert_file_exists ${util}
+    if assert_file_exists "${util}"
     then
-        source ${util}
+        source "${util}"
     fi
 done
 
