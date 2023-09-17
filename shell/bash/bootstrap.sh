@@ -42,7 +42,7 @@ esac
 # For now, let's continue to use distant libraries since we do not relaunch
 # shells 100 times per day.
 # NOTE: However, be ready to move these to local if it causes to much problems.
-source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/ebb22985000ec8e08c3296483f38229d/raw/assert.sh)"
+source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/714cbe584353ba98b4cf52cef999e794/raw/assert.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
 
