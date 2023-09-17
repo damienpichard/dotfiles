@@ -79,7 +79,7 @@ done
 
 
 # Load all the *.bash configuration file in utils/
-for util in "$SH_DIR/utils/*.util.bash"
+for util in $SH_DIR/utils/*.util.bash
 do
     if assert_file_exists "${util}"
     then

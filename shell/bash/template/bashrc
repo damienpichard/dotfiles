@@ -46,23 +46,23 @@ export BASH_MINIMUM_VERSION=5.1.0
 
 
 # Enable daily checks for update.  Set to `false` to disable.
-export ENABLE_AUTO_UPDATE="true"
+export ENABLE_AUTO_UPDATE=true
 
 
 # Enable auto-update without prompting.  Set to `false` to disable.
-export ENABLE_UPDATE_WITHOUT_PROMPT="true"
+export ENABLE_UPDATE_WITHOUT_PROMPT=true
 
 
 # Enable colors in `ls' output.  Set to `false` to disable.
-export ENABLE_LS_COLORS="true"
+export ENABLE_LS_COLORS=true
 
 
 # Enable colors in `grep' output.  Set to `false` to disable.
-export ENABLE_GREP_COLORS="true"
+export ENABLE_GREP_COLORS=true
 
 
 # Enable colors in `man' pages.  Set to `false` to disable.
-export ENABLE_MAN_COLORS="true"
+export ENABLE_MAN_COLORS=true
 
 
 # In case language environement need to be manually set.
@@ -78,7 +78,8 @@ export MANPATH="/usr/local/man:/usr/share/man"
 
 
 # Prefered editor for local and remote sessions.
-if [ -n $SSH_CONNECTION ]; then
+if [ -n $SSH_CONNECTION ]
+then
     export EDITOR='vi'
 else
     export EDITOR='vi'
