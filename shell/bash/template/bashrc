@@ -82,7 +82,7 @@ export MANPATH="/usr/local/man:/usr/share/man"
 
 
 # Prefered editor for local and remote sessions.
-if [ -n $SSH_CONNECTION ]
+if [ -n ${SSH_CONNECTION} ]
 then
     export EDITOR='vi'
 else
@@ -102,4 +102,4 @@ export SSH_KEY_PATH="${HOME}/.ssh/id_ed25519"
 
 
 # Bootstrap BASH dotfiles setup!
-source $SH_DIR/bootstrap.sh
+source "${SH_DIR}/bootstrap.sh"
