@@ -15,6 +15,7 @@
 
 
 <div align="center">
+
 ![screenshot](https://github.com/damienpichard/dotfiles/blob/main/screenshot.png)
 
 *All the little elves that help me doing things on my computer.*
