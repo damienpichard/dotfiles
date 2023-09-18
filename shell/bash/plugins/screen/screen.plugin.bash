@@ -26,7 +26,7 @@
 
 
 
-if command_exists screen
+if assert_command_exists screen
 then
     if assert_string_empty "$STY"
     then

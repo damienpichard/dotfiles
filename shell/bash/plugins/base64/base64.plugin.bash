@@ -28,7 +28,7 @@
 
 
 function encode64 {
-    if assert_eq 0 $#
+    if assert_null ${#}
     then
         cat | base64
     else
@@ -39,7 +39,7 @@ function encode64 {
 
 
 decode64() {
-    if assert_eq 0 $#
+    if assert_null ${#}
     then
         cat | base64 --decode
     else

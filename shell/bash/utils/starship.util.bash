@@ -30,7 +30,7 @@
 # When `starship` is not installed, use the ultra-simple `clear` theme.
 # NOTE: One can find startship configuration in `terminal/shartship`
 #       and install it with `dotfiles install terminal/starship`.
-if assert_true ${ENABLE_STARSHIP_PROMPT} && command_exists starship
+if assert_true ${ENABLE_STARSHIP_PROMPT} && assert_command_exists starship
 then
     eval "$(starship init bash)"
 else

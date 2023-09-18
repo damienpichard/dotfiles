@@ -33,7 +33,7 @@ then
     export MANPATH="$MANPATH:/usr/local/share/man"
 
 
-    if command_exists brew
+    if assert_command_exists brew
     then
         # Add some useful shortcuts as aliases
         alias buuc="brew update && brew upgrade && brew cleanup"

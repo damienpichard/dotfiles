@@ -54,9 +54,7 @@ function safe_append_prompt_command {
 
 
 function command_prompt {
-    result=$?
-
-    if assert_eq $result 0
+    if assert_null ${?}
     then
         PS1="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}\W${TEXT_FORMAT_NOESC_RESET}\n"
         PS1+="${TEXT_FORMAT_BOLD}${TEXT_FORMAT_FOREGROUND_LIGHT_GREEN}${SH_THEME_PROMPT}${TEXT_FORMAT_NOESC_RESET} "

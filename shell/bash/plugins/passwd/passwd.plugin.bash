@@ -28,13 +28,13 @@
 
 function generate_password {
     # Use `pwgen' or `apg' as default for better password generation.
-    if assert_string_not_empty "$1" && assert_geq "$1" 0
+    if assert_pos $1
     then
-        if command_exists pwgen
+        if assert_command_exists pwgen
         then
             # Generate ONE password containing upper and lowercase letters, numbers and symbols.
             password=$(pwgen -cnsy -N 1 $1)
-        elif command_exists apg
+        elif assert_command_exists apg
         then
             password=$(apg -m $1 -x 1 -M SNCL -a 1 -n 1);
         else
