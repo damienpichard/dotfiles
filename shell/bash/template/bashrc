@@ -53,6 +53,10 @@ export ENABLE_AUTO_UPDATE=true
 export ENABLE_UPDATE_WITHOUT_PROMPT=true
 
 
+# Enable `starship' cross-shell prompt launch by default.  Set to `false` to disable.
+export ENABLE_STARSHIP_PROMPT=true
+
+
 # Enable colors in `ls' output.  Set to `false` to disable.
 export ENABLE_LS_COLORS=true
 
