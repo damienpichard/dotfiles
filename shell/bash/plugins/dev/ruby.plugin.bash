@@ -33,6 +33,6 @@ then
 
     # Get the version of the last updated ruby executable and use it to
     # generate the gem PATH.
-    ruby_version=$(ruby -v | awk -F ' ' '{print $2}' | sed -r 's/(.*)\..*/\1\.0/')
+    ruby_version=$(ruby --version | awk -F ' ' '{print $2}' | sed -r 's/(.*)\..*/\1\.0/')
     export PATH="/usr/local/lib/ruby/gems/${ruby_version}/bin:$PATH"
 fi
