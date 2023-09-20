@@ -49,16 +49,18 @@ function generate_password {
 
 function colorize_password {
     # Generate and colorize a password of length ${1} or 16 by default.
+    colorized_password=""
     while read -n1 character
     do
       case $character in
-        [0-9]) printf "$TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE%s$TEXT_FORMAT_NOESC_RESET"   "${character}"  ;;
-        [a-z]) printf "$TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_RED%s$TEXT_FORMAT_NOESC_RESET"    "${character}"  ;;
-        [A-Z]) printf "$TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_GREEN%s$TEXT_FORMAT_NOESC_RESET"  "${character}"  ;;
-        *)     printf "$TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_YELLOW%s$TEXT_FORMAT_NOESC_RESET" "${character}"  ;;
+        [0-9]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}${character}";;
+        [a-z]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_RED}${character}";;
+        [A-Z]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_GREEN}${character}";;
+        *)     colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_YELLOW}${character}";;
       esac
     done < <(echo -n "$(generate_password ${1:-16})");
-    echo;
+
+    echo -e "$colorized_password${TEXT_FORMAT_NOESC_RESET}"
 }
 
 
