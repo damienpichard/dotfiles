@@ -30,6 +30,6 @@ if assert_eq $SYSTEM macos
 then
     # Get the version of the last updated python3 executable and use it to
     # generate the pip binaries PATH.
-    python_version=$(python -v | awk -F ' ' '{print $2}' | sed -r 's/(.*)\..*/\1/')
+    python_version=$(python3 -v | awk -F ' ' '{print $2}' | sed -r 's/(.*)\..*/\1/')
     export PATH="${HOME}/Library/Python/${python_version}/bin/:$PATH"
 fi
