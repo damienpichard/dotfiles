@@ -28,8 +28,21 @@
 
 
 # Add linked directory for personnal projects to PATH
-export PATH="${HOME}/.local/bin:$PATH"
-export PATH="${HOME}/.local/scripts:$PATH"
+local_path="${HOME}/.local"
+local_bin_path="${local_path}/bin"  # binaries
+local_scr_path="${local_path}/scr"  # scripts
+
+if ! assert_directory_exists "${local_bin_path}"
+then
+    mkdir -p "${local_bin_path}"
+fi
+if ! assert_directory_exists "${local_scr_path}"
+then
+    mkdir -p "${local_scr_path}"
+fi
+
+export PATH="${local_bin_path}:$PATH"
+export PATH="${local_scr_path}:$PATH"
 
 
 # Add Bash configuration for each languages plugins are available
