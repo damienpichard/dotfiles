@@ -28,3 +28,7 @@
 
 # Set PATH to cargo
 export PATH="${HOME}/.cargo/bin/:$PATH"
+
+
+alias rc="rustc -O"
+alias rd="rustc -g"
