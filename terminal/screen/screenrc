@@ -57,7 +57,7 @@ bind Q quit
 bind R source ~/.screenrc
 
 # Set our terminal as 256color one.
-term xterm-256colors
+truecolor on
 
 # the following two lines give a two-line status, with the current window highlighted
 hardstatus alwayslastline "%{-}%{= W} %-Lw%{= r}%n%f %t%{-}%+Lw %= %{= w}|%{-} %{w}%Y/%m/%d %c:%s"
