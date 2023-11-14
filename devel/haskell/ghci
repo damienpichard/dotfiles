@@ -22,8 +22,8 @@
 
 
 -- Use a fancy prompt indicator.
-:set prompt  "\ESC[32;1m\ESC[0m "
-:set prompt2 "\ESC[32;1m|\ESC[0m "
+:set prompt      "\ESC[32;1m \ESC[0m "
+:set prompt-cont "\ESC[33;1m| \ESC[0m "
 
 
 
