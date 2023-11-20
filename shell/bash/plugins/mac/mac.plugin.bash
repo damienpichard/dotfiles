@@ -32,6 +32,7 @@ then
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
     export MANPATH="$MANPATH:/usr/local/share/man"
 
+    ICLOUD_PATH="${HOME}/Library/Library/Mobile Documents/com~apple~CloudDocs/"
 
     if assert_command_exists brew
     then
@@ -53,4 +54,6 @@ then
     then
         export PATH="$PATH:/Library/TeX/texbin"
     fi
+
+    alias icloudclear="find ${ICLOUD_PATH} -type f -exec brctl evict {} \;"
 fi
