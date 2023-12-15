@@ -33,11 +33,11 @@ then
 
 
     case $SYSTEM in
-        macos) # NOTE: On macOS, using `exa` or `gls' (from `coreutils`) require to load Homebrew BEFORE this script.
-            if assert_command_exists exa
+        macos) # NOTE: On macOS, using `eza` or `gls' (from `coreutils`) require to load Homebrew BEFORE this script.
+            if assert_command_exists eza
             then
-               alias ls="exa      --color=auto --icons --group-directories-first"
-               alias la="exa -ahl --color=auto --icons --group-directories-first"
+               alias ls="eza      --color=auto --icons --group-directories-first"
+               alias la="eza -ahl --color=auto --icons --group-directories-first"
             elif assert_command_exists gls
             then
                 alias ls='gls -GhvX --group-directories-first --color=tty'
@@ -46,21 +46,21 @@ then
             fi
             ;;
 
-        linux) # NOTE: On GNU/Linux GNU `coreutils' should already be installed and will be default if `exa` is not.
-            if assert_command_exists exa
+        linux) # NOTE: On GNU/Linux GNU `coreutils' should already be installed and will be default if `eza` is not.
+            if assert_command_exists eza
             then
-               alias ls="exa      --color=auto --icons --group-directories-first"
-               alias la="exa -ahl --color=auto --icons --group-directories-first"
+               alias ls="eza      --color=auto --icons --group-directories-first"
+               alias la="eza -ahl --color=auto --icons --group-directories-first"
             else
                 alias ls='ls --color=tty'
             fi
             ;;
 
-        freebsd) # NOTE: On FreeBSD, using `exa` or `gls' (from `coreutils`) require them to be installed.
-            if assert_command_exists exa
+        freebsd) # NOTE: On FreeBSD, using `eza` or `gls' (from `coreutils`) require them to be installed.
+            if assert_command_exists eza
             then
-               alias ls="exa      --color=auto --icons --group-directories-first"
-               alias la="exa -ahl --color=auto --icons --group-directories-first"
+               alias ls="eza      --color=auto --icons --group-directories-first"
+               alias la="eza -ahl --color=auto --icons --group-directories-first"
             elif assert_command_exists gls
             then
                 alias ls='gls -GhvX --group-directories-first --color=tty'
@@ -69,24 +69,24 @@ then
             fi
             ;;
 
-        netbsd) # NOTE: On NetBSD, using `exa` or `gls' (from `coreutils`) require them to be installed.
+        netbsd) # NOTE: On NetBSD, using `eza` or `gls' (from `coreutils`) require them to be installed.
                 # Otherwise do not change anything since NetBSD `ls' does not support colors.
-            if assert_command_exists exa
+            if assert_command_exists eza
             then
-               alias ls="exa      --color=auto --icons --group-directories-first"
-               alias la="exa -ahl --color=auto --icons --group-directories-first"
+               alias ls="eza      --color=auto --icons --group-directories-first"
+               alias la="eza -ahl --color=auto --icons --group-directories-first"
             elif assert_command_exists gls
             then
                 alias ls='gls -GhvX --group-directories-first --color=tty'
             fi
             ;;
 
-        openbsd) # NOTE: On OpenBSD, using `exa` or `gls' (from `coreutils`) require them to be installed.
+        openbsd) # NOTE: On OpenBSD, using `eza` or `gls' (from `coreutils`) require them to be installed.
                  # Otherwise, the default `colorls' has (obviously) colors and multibyte support, so it will be used.
-            if assert_command_exists exa
+            if assert_command_exists eza
             then
-               alias ls="exa      --color=auto --icons --group-directories-first"
-               alias la="exa -ahl --color=auto --icons --group-directories-first"
+               alias ls="eza      --color=auto --icons --group-directories-first"
+               alias la="eza -ahl --color=auto --icons --group-directories-first"
             elif assert_command_exists gls
             then
                 alias ls='gls -GhvX --group-directories-first --color=tty'
