@@ -34,28 +34,51 @@ PKGSRC_PATH="${HOME}/.config/pkgsrc"
 
 if assert_directory_exists "${PKGSRC_PATH}"; then
   PKGSRC_BIN_PATH="${PKGSRC_PATH}/bin"
+  PKGSRC_SBIN_PATH="${PKGSRC_PATH}/sbin"
   PKGSRC_MAN_PATH="${PKGSRC_PATH}/man"
 
   # Add `pkgsrc'  paths to ${PATH} and ${MANPATH}
-  export PATH="${PKGSRC_BIN_PATH}:${PATH}"
+  export PATH="${PKGSRC_SBIN_PATH}:${PKGSRC_BIN_PATH}:${PATH}"
   export MANPATH="${PKGSRC_MAN_PATH}:${PATH}"
 
-  # Add a shortcut to find new packages to install.
-  alias pkg_find="find ${PKGSRC_PATH} -type directory -not -path \"*/work/*\" -name"
+  # Set `pkgsrc' path to ${PKGSRCDIR} for `pkg_rolling-update'
+  export PKGSRCDIR="${PKGSRC_PATH}"
 
+  # A general purpose function for `pkgsrc'
+  function pkgsrc {
+    function pkgsrc_install {
+      PKG_PATH="${PKGSRC_PATH}/${1}"
+      if assert_directory_exists "${PKG_PATH}"; then
+        bmake -C "${PKG_PATH}" install clean clean-depends distclean
+      else
+        print_error "no such file or directory: ${PKG_PATH}"
+      fi
+    }
 
-  function pkg_src {
-    if assert_directory_exists "${PKGSRC_PATH}/$2"
-    then
-      cd "${PKGSRC_PATH}/$2"
-    else
-      print_error "no such file or directory: ${PKGSRC_PATH}/$2"
-      return
-    fi
+    function pkgsrc_update {
+      PKG_PATH="${PKGSRC_PATH}/${1}"
+      if assert_directory_exists "${PKG_PATH}"; then
+        bmake -C "${PKG_PATH}" update clean clean-depends distclean
+      else
+        print_error "no such file or directory: ${PKG_PATH}"
+      fi
+    }
+
+    function pkgsrc_remove {
+      PKG_PATH="${PKGSRC_PATH}/${1}"
+      if assert_directory_exists "${PKG_PATH}"; then
+        bmake -C "${PKG_PATH}" deinstall clean clean-depends distclean
+      else
+        print_error "no such file or directory: ${PKG_PATH}"
+      fi
+    }
 
     case "$1" in
-      install|i) bmake install clean clean-depends distclean ;;
-      update|u)  bmake update clean clean-depends distclean ;;
+      install|i) pkgsrc_install "$2" ;;
+      update|u)  pkgsrc_update  "$2" ;;
+      remove|r)  pkgsrc_remove  "$2" ;;
+      upgrade|U) git -C "${PKGSRC_PATH}" fetch -p ;;
+      find|f)    find ${PKGSRC_PATH} -type directory -not -path "*/work/*" -name "$2" ;;
     esac
   }
 fi
