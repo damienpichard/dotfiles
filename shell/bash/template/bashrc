@@ -1,8 +1,8 @@
 ### bashrc ---                                      -*- mode: shell-script;  -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,7 @@ export SH_PLUGINS=(base64 man pkg os)
 
 
 # Set the current version of these dotfiles.
-export SH_VERSION=2023
+export SH_VERSION=2025
 
 
 # Set the minimum version of GNU/Bash required to run these dotfiles.
@@ -69,7 +69,7 @@ export ENABLE_GREP_COLORS=true
 export ENABLE_MAN_COLORS=true
 
 
-# In case language environement need to be manually set.
+# In case language environment need to be manually set.
 export LANG=en_US.UTF-8
 
 
@@ -81,7 +81,11 @@ export PATH="/usr/sbin:/usr/bin:/sbin:/bin"
 export MANPATH="/usr/local/man:/usr/share/man"
 
 
-# Prefered editor for local and remote sessions.
+# Path to main SSH key.
+export SSH_KEY_PATH="${HOME}/.ssh/id_ed25519"
+
+
+# Preferred editor for local and remote sessions.
 if [ -n ${SSH_CONNECTION} ]
 then
     export EDITOR='vi'
@@ -96,9 +100,6 @@ export CFLAGS="-march=native -mtune=native -Os -pipe -pedantic"
 export CXXFLAGS="${CFLAGS}"
 export MAKEOPTS="-j4"
 
-
-# Path to main SSH key.
-export SSH_KEY_PATH="${HOME}/.ssh/id_ed25519"
 
 
 # Bootstrap BASH dotfiles setup!

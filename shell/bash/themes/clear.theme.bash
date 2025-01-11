@@ -1,8 +1,8 @@
 ### clear.theme.bash ---                             -*- mode: shell-script; -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025 Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -40,11 +40,9 @@ function safe_append_prompt_command {
         *)     prompt_re="\<${1}\>"           ;; # Linux/FreeBSD/...
     esac
 
-    if expr "${PROMPT_COMMAND[*]:-}" : "${prompt_re}"
-    then
+    if expr "${PROMPT_COMMAND[*]:-}" : "${prompt_re}"; then
       return
-    elif assert_string_empty "${PROMPT_COMMAND}"
-    then
+    elif assert_string_empty "${PROMPT_COMMAND}"; then
       PROMPT_COMMAND="${1}"
     else
       PROMPT_COMMAND="${1};${PROMPT_COMMAND}"
@@ -54,8 +52,7 @@ function safe_append_prompt_command {
 
 
 function command_prompt {
-    if assert_null ${?}
-    then
+    if assert_null ${?}; then
         PS1="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}\W${TEXT_FORMAT_NOESC_RESET}\n"
         PS1+="${TEXT_FORMAT_BOLD}${TEXT_FORMAT_FOREGROUND_LIGHT_GREEN}${SH_THEME_PROMPT}${TEXT_FORMAT_NOESC_RESET} "
     else

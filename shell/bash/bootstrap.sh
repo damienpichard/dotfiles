@@ -1,8 +1,8 @@
 ### bootstrap.sh ---                                -*- mode: shell-script;  -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -20,17 +20,14 @@
 
 ### Commentary:
 
-#  This project has as goal to be the lightest GNU/bash configuration.
-#  For that purpose, we externalize as many as possible scripts and
-#  plugins as independant pieces of softwares
-#  (may they be dash/python/ruby/etc scripts
-#       or      c/c++/haskell/go/rust/etc compiled softwares).
+
+## This project aims to create the lightest GNU/bash configuration by
+## externalizing scripts and plugins to independent software pieces.
+
 
 ### Code:
 
-
-
-# Stop here when executing non-interactive scripts.
+# Stop executing non-interactive scripts.
 # Continue in any GNU/Bash shell.
 case $- in
   *i*) ;;
@@ -39,50 +36,40 @@ esac
 
 
 
-# For now, let's continue to use distant libraries since we do not relaunch
-# shells 100 times per day.
-# NOTE: However, be ready to move these to local if it causes to much problems.
+# Let’s continue using distant libraries for the time being,
+# but switch to local libraries if they cause substantial issues.
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/714cbe584353ba98b4cf52cef999e794/raw/assert.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
 source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
 
 
 
+# Check if GNU/Bash version is >= ${BASH_MINIMUM_VERSION}.
 # HACK: https://unix.stackexchange.com/a/285928
-# Check if GNU/Bash version is >= $BASH_MINIMUM_VERSION.
-if assert_string_neq "$(printf '%s\n' "${BASH_MINIMUM_VERSION}" "${BASH_VERSION}" | sort -V | head -n1)" "${BASH_MINIMUM_VERSION}"
-then
-    print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}."
-    print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above."
-    print_error "consider to update GNU/Bash before using this configuration."
-    return 1
+if assert_bash_minimum_version_eq "${BASH_MINIMUM_VERSION}"; then
+  print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}"
+  print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above"
+  print_error "consider to update GNU/Bash before using this configuration"
+  return 1
 fi
 
 
 
-# Check if plugins exist and load them.
-# NOTE: This configuration tends to rely on and invite the user to create his
-#       own external tools.  Therefore, there will be not much plugins.
-for plugin in ${SH_PLUGINS[*]}
-do
-    if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
-    then
-        source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
-    elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
-    then
-        source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
-    else
-        print_warning "no such plugin: '${plugin}'"
-    fi
+# Check for and load available plugins.
+# NOTE: This configuration heavily relies on users creating their own external tools.
+for plugin in ${SH_PLUGINS[*]}; do
+  if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"; then
+    source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
+  elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"; then
+    source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
+  fi
 done
 
 
 
 # Load all the *.bash configuration file in utils/
-for util in $SH_DIR/utils/*.util.bash
-do
-    if assert_file_exists "${util}"
-    then
-        source "${util}"
-    fi
+for util in $SH_DIR/utils/*.util.bash; do
+  if assert_file_exists "${util}"; then
+    source "${util}"
+  fi
 done

@@ -1,8 +1,8 @@
 ### files.util.bash ---                              -*- mode: shell-script; -*-
 
-## Copyright (C) 2020-2023  Damien Pichard
+## Copyright (C) 2020-2025  Damien Pichard
 
-## Author: Damien Pichard <damienpichard@tutanota.de>
+## Author: Damien Pichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -26,9 +26,8 @@
 
 
 
-if assert_command_exists grm
-then
-   # Use GNU/CoreUtils `rm' by default`
+if assert_command_exists grm; then
+   # Use GNU/CoreUtils `rm' by default
    # rm {
    #     Ask for risky actions
    #     Preserve root on any device
@@ -38,9 +37,8 @@ then
    alias rm="grm -I --preserve-root=all --recursive --dir"
 fi
 
-if assert_command_exists gmv
-then
-   # Use GNU/CoreUtils `rm' by default`
+if assert_command_exists gmv; then
+   # Use GNU/CoreUtils `rm' by default
    # mv {
    #     Preserve files
    #     Move only new files
@@ -48,9 +46,8 @@ then
    alias mv="gmv --no-clobber --update"
 fi
 
-if assert_command_exists gcp
-then
-   # Use GNU/CoreUtils `cp' by default`
+if assert_command_exists gcp; then
+   # Use GNU/CoreUtils `cp' by default
    # cp {
    #     Preserve files
    #     Move files recursively
@@ -58,27 +55,24 @@ then
    alias cp="gcp --no-clobber --recursive"
 fi
 
-if assert_command_exists gchown
-then
-   # Use GNU/CoreUtils `chown' by default`
+if assert_command_exists gchown; then
+   # Use GNU/CoreUtils `chown' by default
    # chown {
    #     Preserve files
    # }
    alias chown="gchown --preserve-root"
 fi
 
-if assert_command_exists gchmod
-then
-   # Use GNU/CoreUtils `chmod' by default`
+if assert_command_exists gchmod; then
+   # Use GNU/CoreUtils `chmod' by default
    # chmod {
    #     Preserve files
    # }
    alias chmod="gchmod --preserve-root"
 fi
 
-if assert_command_exists gchgrp
-then
-   # Use GNU/CoreUtils `chgrp' by default`
+if assert_command_exists gchgrp; then
+   # Use GNU/CoreUtils `chgrp' by default
    # chgrp {
    #     Preserve files
    # }

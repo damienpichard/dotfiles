@@ -1,8 +1,8 @@
 ### starship.util.bash ---                            -*- mode: shell-script; -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -30,8 +30,7 @@
 # When `starship` is not installed, use the ultra-simple `clear` theme.
 # NOTE: One can find startship configuration in `terminal/shartship`
 #       and install it with `dotfiles install terminal/starship`.
-if assert_true ${ENABLE_STARSHIP_PROMPT} && assert_command_exists starship
-then
+if assert_true ${ENABLE_STARSHIP_PROMPT} && assert_command_exists starship; then
     eval "$(starship init bash)"
 else
     source $SH_DIR/themes/clear.theme.bash
