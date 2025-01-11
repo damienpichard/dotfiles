@@ -1,0 +1,26 @@
+# appearance
+theme             = nord
+font-family       = "JetBrains Mono"
+font-size         = 14
+font-thicken      = true
+bold-is-bright    = true
+adjust-cell-width = 10%
+
+# cursor
+cursor-style            = underline
+cursor-style-blink      = false
+cursor-invert-fg-bg     = true
+mouse-hide-while-typing = true
+
+# macOS-specific settings
+macos-titlebar-style = tabs
+
+# extras
+shell-integration-features = true
+copy-on-select             = clipboard
+focus-follows-mouse        = true
+link-url                   = true
+
+# auto update settings
+auto-update         = download
+auto-update-channel = stable
