@@ -1,8 +1,8 @@
 ### man.plugin.bash ---                              -*- mode: shell-script; -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -24,20 +24,21 @@
 
 ### Code:
 
+
 export MANPATH="/usr/local/pkg/man:$MANPATH"
 
 
-alias man=colorize-man-pages
-function colorize-man-pages {
-    env \
-        LESS_TERMCAP_mb=$(printf $TEXT_FORMAT_NOESC_BOLD$TEXT_FORMAT_NOESC_FOREGROUND_BLUE) \
-        LESS_TERMCAP_md=$(printf $TEXT_FORMAT_NOESC_FOREGROUND_BLUE) \
-        LESS_TERMCAP_me=$(printf $TEXT_FORMAT_NOESC_RESET) \
-        LESS_TERMCAP_se=$(printf $TEXT_FORMAT_NOESC_RESET) \
-        LESS_TERMCAP_so=$(printf $TEXT_FORMAT_NOESC_BACKGROUND_LIGHT_GRAY$TEXT_FORMAT_NOESC_FOREGROUND_BLACK) \
-        LESS_TERMCAP_ue=$(printf $TEXT_FORMAT_NOESC_RESET) \
-        LESS_TERMCAP_us=$(printf $TEXT_FORMAT_NOESC_BOLD$TEXT_FORMAT_NOESC_FOREGROUND_RED) \
-        PAGER="less" \
-        _NROFF_U=1 \
-        man "$@"
+alias man=colman
+function colman {
+  env \
+    LESS_TERMCAP_mb=$(printf $TEXT_FORMAT_NOESC_BOLD$TEXT_FORMAT_NOESC_FOREGROUND_BLUE) \
+    LESS_TERMCAP_md=$(printf $TEXT_FORMAT_NOESC_FOREGROUND_BLUE) \
+    LESS_TERMCAP_me=$(printf $TEXT_FORMAT_NOESC_RESET) \
+    LESS_TERMCAP_se=$(printf $TEXT_FORMAT_NOESC_RESET) \
+    LESS_TERMCAP_so=$(printf $TEXT_FORMAT_NOESC_BACKGROUND_LIGHT_GRAY$TEXT_FORMAT_NOESC_FOREGROUND_BLACK) \
+    LESS_TERMCAP_ue=$(printf $TEXT_FORMAT_NOESC_RESET) \
+    LESS_TERMCAP_us=$(printf $TEXT_FORMAT_NOESC_BOLD$TEXT_FORMAT_NOESC_FOREGROUND_RED) \
+    PAGER="less" \
+    _NROFF_U=1 \
+    man "$@"
 }
