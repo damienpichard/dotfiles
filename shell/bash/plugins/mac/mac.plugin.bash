@@ -62,9 +62,9 @@ if assert_eq $SYSTEM macos; then
   fi
   
 
-  HOMEBREW_BIN_PATH="/usr/local/bin"
-  HOMEBREW_SBIN_PATH="/usr/local/sbin"
-  HOMEBREW_MAN_PATH="/usr/local/share/man"
+  HOMEBREW_BIN_PATH="/opt/homebrew/bin"
+  HOMEBREW_SBIN_PATH="/opt/homebrew/sbin"
+  HOMEBREW_MAN_PATH="/opt/homebrew/share/man"
   HOMEBREW_CACHE_PATH="${HOME}/Library/Caches/Homebrew"
   HOMEBREW_BIN="${HOMEBREW_BIN_PATH}/brew"
   if assert_file_exists ${HOMEBREW_BIN}; then
