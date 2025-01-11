@@ -1,8 +1,8 @@
 ### passwd.plugin.bash ---                          -*- mode: shell-script;  -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -21,48 +21,47 @@
 ### Commentary:
 
 ## Adapted from:
-## https://blog.sleeplessbeastie.eu/2016/04/11/how-to-generate-random-password-using-command-line/
+## https://blog.sleeplessbeastie.eu/2016/04/11/how-to-generate-random-password-using-command-line/
 
 ### Code:
 
 
-function generate_password {
-    # Use `pwgen' or `apg' as default for better password generation.
-    if assert_pos $1
-    then
-        if assert_command_exists pwgen
-        then
-            # Generate ONE password containing upper and lowercase letters, numbers and symbols.
-            password=$(pwgen -cnsy -N 1 $1)
-        elif assert_command_exists apg
-        then
-            password=$(apg -m $1 -x 1 -M SNCL -a 1 -n 1);
-        else
-            password=$(head /dev/urandom | LC_CTYPE=C tr -dc '[:graph:]' | fold -w$1 | sed '$d' | shuf -n1);
-        fi
-    fi
+function genpass {
+  # Generate ONE single password of length ${1} containing
+  #   - uppercase letters
+  #   - lowercase letters
+  #   - numbers
+  #   - symbols
 
-    echo $password
+  if assert_pos $1; then
+    if assert_command_exists pwgen; then
+      echo $(pwgen -cnsy -N 1 $1)
+    elif assert_command_exists apg; then
+      echo $(apg -m $1 -x 1 -M SNCL -a 1 -n 1);
+    else
+      echo $(head /dev/urandom | LC_CTYPE=C tr -dc '[:graph:]' | fold -w$1 | sed '$d' | shuf -n1);
+    fi
+  fi
 }
 
 
 
-function colorize_password {
-    # Generate and colorize a password of length ${1} or 16 by default.
+function colpass {
+    # Generate a password of length ${1} or 16 by default.
+    new_password=$(genpass ${1:-16})
+
+    # Colorize the newly generated password.
     colorized_password=""
-    while read -n1 character
-    do
+    while read -n1 character; do
       case $character in
         [0-9]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_BLUE}${character}";;
         [a-z]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_RED}${character}";;
         [A-Z]) colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_GREEN}${character}";;
         *)     colorized_password+="${TEXT_FORMAT_NOESC_FOREGROUND_LIGHT_YELLOW}${character}";;
       esac
-    done < <(echo -n "$(generate_password ${1:-16})");
+    done < <(echo -n "${new_password}");
 
-    echo -e "$colorized_password${TEXT_FORMAT_NOESC_RESET}"
+    # Print the password.
+    # NOTE: Don't forget to reset the escape sequences to avoid color mess.
+    echo -e "${colorized_password}${TEXT_FORMAT_NOESC_RESET}"
 }
-
-
-
-alias passgen=colorize_password
