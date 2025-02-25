@@ -1,10 +1,12 @@
 # appearance
 theme             = nord
 font-family       = "JetBrains Mono"
-font-size         = 14
+font-size         = 16
 font-thicken      = true
 bold-is-bright    = true
-adjust-cell-width = 10%
+adjust-cell-width = 15%
+window-height     = 25
+window-width      = 80
 
 # cursor
 cursor-style            = underline
