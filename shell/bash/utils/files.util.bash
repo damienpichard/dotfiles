@@ -78,3 +78,14 @@ if assert_command_exists gchgrp; then
    # }
    alias chgrp="gchgrp --preserve-root"
 fi
+
+if assert_command_exists gmkdir; then
+  # Use GNU/CoreUtils `gmkdir` by default
+  # mkdir {
+  #     Make parent directories as needed
+  # }
+  function mkcd {
+    gmkdir -p "${1}"
+    cd "${1}"
+  }
+fi
