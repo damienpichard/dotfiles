@@ -26,9 +26,15 @@
 
 
 
-# Set PATH to cargo
-export PATH="${HOME}/.cargo/bin/:$PATH"
+# Set ${PATH} to `rustup' when installed.
+if assert_command_exists rustup; then
+  export PATH="/opt/homebrew/opt/rustup/bin:${PATH}"
+fi
 
+# Set ${PATH} to `cargo' when installed.
+if assert_command_exists cargo; then
+  export PATH="${HOME}/.cargo/bin/:${PATH}"
+fi
 
 alias rc="rustc -O"
 alias rd="rustc -g"
