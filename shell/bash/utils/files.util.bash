@@ -24,68 +24,66 @@
 
 ### Code:
 
-
-
 if assert_command_exists grm; then
-   # Use GNU/CoreUtils `rm' by default
-   # rm {
-   #     Ask for risky actions
-   #     Preserve root on any device
-   #     Delete recursively
-   #     Delete empty directory
-   # }
-   alias rm="grm -I --preserve-root=all --recursive --dir"
+    # Use GNU/CoreUtils `rm' by default
+    # rm {
+    #     Ask for risky actions
+    #     Preserve root on any device
+    #     Delete recursively
+    #     Delete empty directory
+    # }
+    alias rm="grm -I --preserve-root=all --recursive --dir"
 fi
 
 if assert_command_exists gmv; then
-   # Use GNU/CoreUtils `rm' by default
-   # mv {
-   #     Preserve files
-   #     Move only new files
-   # }
-   alias mv="gmv --no-clobber --update"
+    # Use GNU/CoreUtils `rm' by default
+    # mv {
+    #     Preserve files
+    #     Move only new files
+    # }
+    alias mv="gmv --no-clobber --update"
 fi
 
 if assert_command_exists gcp; then
-   # Use GNU/CoreUtils `cp' by default
-   # cp {
-   #     Preserve files
-   #     Move files recursively
-   # }
-   alias cp="gcp --no-clobber --recursive"
+    # Use GNU/CoreUtils `cp' by default
+    # cp {
+    #     Preserve files
+    #     Move files recursively
+    # }
+    alias cp="gcp --no-clobber --recursive"
 fi
 
 if assert_command_exists gchown; then
-   # Use GNU/CoreUtils `chown' by default
-   # chown {
-   #     Preserve files
-   # }
-   alias chown="gchown --preserve-root"
+    # Use GNU/CoreUtils `chown' by default
+    # chown {
+    #     Preserve files
+    # }
+    alias chown="gchown --preserve-root"
 fi
 
 if assert_command_exists gchmod; then
-   # Use GNU/CoreUtils `chmod' by default
-   # chmod {
-   #     Preserve files
-   # }
-   alias chmod="gchmod --preserve-root"
+    # Use GNU/CoreUtils `chmod' by default
+    # chmod {
+    #     Preserve files
+    # }
+    alias chmod="gchmod --preserve-root"
 fi
 
 if assert_command_exists gchgrp; then
-   # Use GNU/CoreUtils `chgrp' by default
-   # chgrp {
-   #     Preserve files
-   # }
-   alias chgrp="gchgrp --preserve-root"
+    # Use GNU/CoreUtils `chgrp' by default
+    # chgrp {
+    #     Preserve files
+    # }
+    alias chgrp="gchgrp --preserve-root"
 fi
 
 if assert_command_exists gmkdir; then
-  # Use GNU/CoreUtils `gmkdir` by default
-  # mkdir {
-  #     Make parent directories as needed
-  # }
-  function mkcd {
-    gmkdir -p "${1}"
-    cd "${1}"
-  }
+    # Use GNU/CoreUtils `gmkdir` by default
+    # mkdir {
+    #     Make parent directories as needed
+    # }
+    function mkcd {
+        gmkdir -p "${1}"
+        cd "${1}"
+    }
 fi

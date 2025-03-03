@@ -20,56 +20,46 @@
 
 ### Commentary:
 
-
 ## This project aims to create the lightest GNU/bash configuration by
 ## externalizing scripts and plugins to independent software pieces.
-
 
 ### Code:
 
 # Stop executing non-interactive scripts.
 # Continue in any GNU/Bash shell.
 case $- in
-  *i*) ;;
-    *) return;;
+    *i*) ;;
+    *) return ;;
 esac
-
-
 
 # Let’s continue using distant libraries for the time being,
 # but switch to local libraries if they cause substantial issues.
-source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/714cbe584353ba98b4cf52cef999e794/raw/assert.sh)"
-source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
-source /dev/stdin <<<"$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
-
-
+source /dev/stdin <<< "$(curl -sLJ https://gist.githubusercontent.com/damienpichard/714cbe584353ba98b4cf52cef999e794/raw/assert.sh)"
+source /dev/stdin <<< "$(curl -sLJ https://gist.githubusercontent.com/damienpichard/fc1f226f23c7a5a8afecbdaa4b94c5c5/raw/colors.sh)"
+source /dev/stdin <<< "$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
 
 # Check if GNU/Bash version is >= ${BASH_MINIMUM_VERSION}.
 # HACK: https://unix.stackexchange.com/a/285928
 if assert_bash_minimum_version_eq "${BASH_MINIMUM_VERSION}"; then
-  print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}"
-  print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above"
-  print_error "consider to update GNU/Bash before using this configuration"
-  return 1
+    print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}"
+    print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above"
+    print_error "consider to update GNU/Bash before using this configuration"
+    return 1
 fi
-
-
 
 # Check for and load available plugins.
 # NOTE: This configuration heavily relies on users creating their own external tools.
 for plugin in ${SH_PLUGINS[*]}; do
-  if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"; then
-    source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
-  elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"; then
-    source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
-  fi
+    if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"; then
+        source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
+    elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"; then
+        source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
+    fi
 done
-
-
 
 # Load all the *.bash configuration file in utils/
 for util in $SH_DIR/utils/*.util.bash; do
-  if assert_file_exists "${util}"; then
-    source "${util}"
-  fi
+    if assert_file_exists "${util}"; then
+        source "${util}"
+    fi
 done

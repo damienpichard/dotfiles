@@ -24,12 +24,11 @@
 
 ### Code:
 
+# When installed, use `starship` as the default shell prompt.
+# When not installed, use the extremely simple `clear` theme.
 
-
-# Use `starship` as default shell prompt when installed.
-# When `starship` is not installed, use the ultra-simple `clear` theme.
-# NOTE: One can find startship configuration in `terminal/shartship`
-#       and install it with `dotfiles install terminal/starship`.
+# NOTE: One can find the startup configuration for the terminal in
+# the directory `terminal/shartship`.
 if assert_true ${ENABLE_STARSHIP_PROMPT} && assert_command_exists starship; then
     eval "$(starship init bash)"
 else
