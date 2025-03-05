@@ -21,7 +21,7 @@
 ### Commentary:
 
 ## This project aims to create the lightest GNU/bash configuration by
-## externalizing scripts and plugins to independent software pieces.
+## externalizing scripts and plugins to independent softwares.
 
 ### Code:
 
@@ -39,13 +39,19 @@ source /dev/stdin <<< "$(curl -sLJ https://gist.githubusercontent.com/damienpich
 source /dev/stdin <<< "$(curl -sLJ https://gist.githubusercontent.com/damienpichard/5b7222651145769c8dc1f45111c7af8f/raw/helpers.sh)"
 
 # Check if GNU/Bash version is >= ${BASH_MINIMUM_VERSION}.
-# HACK: https://unix.stackexchange.com/a/285928
 if assert_bash_minimum_version_eq "${BASH_MINIMUM_VERSION}"; then
     print_error "your are currently using GNU/Bash ${BASH_VERSION%.*}"
     print_error "unfortunately, this dotfile configuration requires GNU/Bash $BASH_MINIMUM_VERSION or above"
     print_error "consider to update GNU/Bash before using this configuration"
     return 1
 fi
+
+# Load package managers.
+for pkgmgr in ${SH_DIR}/pkgmgr/*.pkgmgr.bash; do
+    if assert_file_exists "${pkgmgr}"; then
+        source "${pkgmgr}"
+    fi
+done
 
 # Check for and load available plugins.
 # NOTE: This configuration heavily relies on users creating their own external tools.
