@@ -30,19 +30,20 @@ config_dir     := ${HOME}/.config
 pkgsrc_dir     := $(config_dir)/pkgsrc
 pkgsrc_src     := https://github.com/NetBSD/pkgsrc.git
 pkgsrc_boot    := $(pkgsrc_dir)/bootstrap
-pkgsrc_branch  := pkgsrc-2024Q3
 pkgsrc_workdir := $(pkgsrc_dir)/.work
-
-
 
 .PHONY: install
 install:
-#git clone -b "$(pkgsrc_branch)" "$(pkgsrc_src)" "$(pkgsrc_dir)" --depth 1
 	git clone "$(pkgsrc_src)" "$(pkgsrc_dir)"
-	$(pkgsrc_boot)/bootstrap --unprivileged --prefix $(pkgsrc_dir) --workdir $(pkgsrc_workdir) --prefer-pkgsrc yes --make-jobs 4
+#$(pkgsrc_boot)/bootstrap --unprivileged --prefix $(pkgsrc_dir) --workdir $(pkgsrc_workdir) --prefer-pkgsrc yes --make-jobs 10
+
+
+.PHONY: reinstall
+reinstall:
+	rm -rf $(pkgsrc_workdir)
+	$(pkgsrc_boot)/bootstrap --unprivileged --prefix $(pkgsrc_dir) --workdir $(pkgsrc_workdir) --prefer-pkgsrc yes --make-jobs 10
 
 
 .PHONY: uninstall
 uninstall:
 	rm -rf "$(pkgsrc_dir)"
-
