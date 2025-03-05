@@ -24,7 +24,7 @@
 
 ### Code:
 
-if assert_eq $SYSTEM macos; then
+if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER macports); then
     MACPORTS_BIN_PATH="/opt/local/bin"
     MACPORTS_SBIN_PATH="/opt/local/sbin"
     MACPORTS_MAN_PATH="/opt/local/share/man"

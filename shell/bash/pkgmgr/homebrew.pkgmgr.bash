@@ -24,16 +24,17 @@
 
 ### Code:
 
-if assert_eq $SYSTEM macos; then
+if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER homebrew); then
     HOMEBREW_BIN_PATH="/opt/homebrew/bin"
     HOMEBREW_SBIN_PATH="/opt/homebrew/sbin"
     HOMEBREW_MAN_PATH="/opt/homebrew/share/man"
     HOMEBREW_CACHE_PATH="${HOME}/Library/Caches/Homebrew"
     HOMEBREW_BIN="${HOMEBREW_BIN_PATH}/brew"
+
     if assert_file_exists ${HOMEBREW_BIN}; then
         # Add Homebrew paths to $PATH and $MANPATH
-        #export PATH="${PATH}:${HOMEBREW_BIN_PATH}:${HOMEBREW_SBIN_PATH}"
-        #export MANPATH="${HOMEBREW_MAN_PATH}:${MANPATH}"
+        export PATH="${HOMEBREW_BIN_PATH}:${HOMEBREW_SBIN_PATH}:${PATH}"
+        export MANPATH="${HOMEBREW_MAN_PATH}:${MANPATH}"
 
         # Add some useful shortcuts as aliases
         alias buuc="brew update && brew upgrade && brew cleanup"

@@ -29,7 +29,7 @@
 # will install `pkgsrc` for you.
 PKGSRC_PATH="${HOME}/.config/pkgsrc"
 
-if assert_directory_exists "${PKGSRC_PATH}"; then
+if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER pkgsrc); then
     PKGSRC_BIN_PATH="${PKGSRC_PATH}/bin"
     PKGSRC_SBIN_PATH="${PKGSRC_PATH}/sbin"
     PKGSRC_MAN_PATH="${PKGSRC_PATH}/man"
