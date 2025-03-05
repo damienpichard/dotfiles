@@ -24,11 +24,8 @@
 
 ### Code:
 
-
-
-# Path to BASH dotfiles directory.
+# Path to GNU/BASH dotfiles directory.
 export SH_DIR="{{BASH}}"
-
 
 # Set the plugins you want to use.
 # NOTE: - Officially supported plugins can be found in `plugins/' directory.
@@ -36,71 +33,59 @@ export SH_DIR="{{BASH}}"
 # Default: SH_PLUGINS=(base64 man pkg os)
 export SH_PLUGINS=(base64 man pkg os)
 
-
 # Set the current version of these dotfiles.
 export SH_VERSION=2025
-
 
 # Set the minimum version of GNU/Bash required to run these dotfiles.
 export BASH_MINIMUM_VERSION=5.1.0
 
-
 # Enable daily checks for update.  Set to `false` to disable.
 export ENABLE_AUTO_UPDATE=true
-
 
 # Enable auto-update without prompting.  Set to `false` to disable.
 export ENABLE_UPDATE_WITHOUT_PROMPT=true
 
-
 # Enable `starship' cross-shell prompt launch by default.  Set to `false` to disable.
 export ENABLE_STARSHIP_PROMPT=true
-
 
 # Enable colors in `ls' output.  Set to `false` to disable.
 export ENABLE_LS_COLORS=true
 
-
 # Enable colors in `grep' output.  Set to `false` to disable.
 export ENABLE_GREP_COLORS=true
-
 
 # Enable colors in `man' pages.  Set to `false` to disable.
 export ENABLE_MAN_COLORS=true
 
-
 # In case language environment need to be manually set.
 export LANG=en_US.UTF-8
-
 
 # A minimal and standard PATH.
 export PATH="/usr/sbin:/usr/bin:/sbin:/bin"
 
-
 # Path to man pages.
 export MANPATH="/usr/local/man:/usr/share/man"
-
 
 # Path to main SSH key.
 export SSH_KEY_PATH="${HOME}/.ssh/id_ed25519"
 
+# Set the package manager you want to use on macOS.
+# Possible values: `homebrew`  `macports`  `pkgsrc`
+# Default: `macports`
+export MACOS_PACKAGE_MANAGER=macports
 
 # Preferred editor for local and remote sessions.
-if [ -n ${SSH_CONNECTION} ]
-then
+if [ -n ${SSH_CONNECTION} ]; then
     export EDITOR='vi'
 else
     export EDITOR='vi'
 fi
-
 
 # Default compilation flags.
 export CHOST="{{UNAMEM}}-{{UNAMES}}"
 export CFLAGS="-march=native -mtune=native -Os -pipe -pedantic"
 export CXXFLAGS="${CFLAGS}"
 export MAKEOPTS="-j4"
-
-
 
 # Bootstrap BASH dotfiles setup!
 source "${SH_DIR}/bootstrap.sh"
