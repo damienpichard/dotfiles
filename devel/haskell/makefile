@@ -1,8 +1,8 @@
 ### makefile ---                                   -*- mode: makefile-gmake; -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025 Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
