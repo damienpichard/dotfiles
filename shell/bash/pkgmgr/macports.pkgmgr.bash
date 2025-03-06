@@ -33,6 +33,11 @@ if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER macports); the
         export PATH="${MACPORTS_BIN_PATH}:${MACPORTS_SBIN_PATH}:${PATH}"
         export MANPATH="${MACPORTS_MAN_PATH}:${PATH}"
 
+        IMAGEMAGICK_PATH="/opt/local/lib/ImageMagick7/bin"
+        if assert_directory_exists ${IMAGEMAGICK_PATH}; then
+            export PATH="${IMAGEMAGICK_PATH}:${PATH}"
+        fi
+
         function macports {
             case "${1}" in
                     info)    port info ${2} ;;
