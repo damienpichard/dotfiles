@@ -297,17 +297,17 @@ style  = 'bold red'
 
 
 
-[javascript]
-format = "[$symbol($version )]($style)"
-symbol = ' '
-style  = 'bold yellow'
-
-
-
 [java]
 format = "[$symbol($version )]($style)"
 symbol = ' '
 style  = 'bold cyan'
+
+
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = ' '
+style  = 'bold yellow'
 
 
 
