@@ -297,6 +297,20 @@ style  = 'bold red'
 
 
 
+[javascript]
+format = "[$symbol($version )]($style)"
+symbol = ' '
+style  = 'bold yellow'
+
+
+
+[java]
+format = "[$symbol($version )]($style)"
+symbol = ' '
+style  = 'bold cyan'
+
+
+
 [golang]
 format = "[$symbol($version )]($style)"
 symbol = ' '
