@@ -1,8 +1,8 @@
 ### starship.toml ---                                    -*- mode: conf-toml; -*-
 
-## Copyright (C) 2021-2023  damienpichard
+## Copyright (C) 2021-2025  Damien Pichard
 
-## Author: damienpichard <damienpichard@tutanota.de>
+## Author: damienpichard <damienpichard@tuta.com>
 ## Keywords:
 
 ## This program is free software; you can redistribute it and/or modify
@@ -26,92 +26,7 @@
 
 
 
-format = """
-$username\
-$hostname\
-$localip\
-$shlvl\
-$singularity\
-$kubernetes\
-$directory\
-$vcsh\
-$fossil_branch\
-$git_branch\
-$git_commit\
-$git_state\
-$git_metrics\
-$git_status\
-$hg_branch\
-$pijul_channel\
-$docker_context\
-$fill\
-$package\
-$c\
-$cmake\
-$cobol\
-$daml\
-$dart\
-$deno\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
-$fennel\
-$golang\
-$guix_shell\
-$haskell\
-$haxe\
-$helm\
-$java\
-$julia\
-$kotlin\
-$gradle\
-$lua\
-$nim\
-$nodejs\
-$ocaml\
-$opa\
-$perl\
-$php\
-$pulumi\
-$purescript\
-$python\
-$raku\
-$rlang\
-$red\
-$ruby\
-$rust\
-$scala\
-$solidity\
-$swift\
-$terraform\
-$vlang\
-$vagrant\
-$zig\
-$buf\
-$nix_shell\
-$conda\
-$meson\
-$spack\
-$memory_usage\
-$aws\
-$gcloud\
-$openstack\
-$azure\
-$env_var\
-$crystal\
-$custom\
-$sudo\
-$cmd_duration\
-$line_break\
-$jobs\
-$battery\
-$time\
-$status\
-$os\
-$container\
-$shell\
-$character"""
+format = "$username$hostname:$directory$fossil_branch$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$fill$cmd_duration$line_break$character"
 
 
 
@@ -131,7 +46,7 @@ show_always = true
 
 # Second param
 [hostname]
-format = "[$hostname]($style):"
+format = "[$hostname]($style)"
 style = "bold dimmed red"
 trim_at = "-"
 ssh_only = false
@@ -164,60 +79,75 @@ unknown_symbol     = "󰂑"
 empty_symbol       = "󰂎"
 
 [[battery.display]]
+threshold          = 100
+discharging_symbol = "󰁹"
+charging_symbol    = "󰂅"
+style              = "bold green"
+
+[[battery.display]]
 threshold          = 90
-symbol             = "󰂂"
+discharging_symbol = "󰂂"
+charging_symbol    = "󰂋"
 style              = "bold green"
 
 [[battery.display]]
 threshold          = 80
-symbol             = "󰂁"
+discharging_symbol = "󰂁"
+charging_symbol    = "󰂊"
 style              = "bold green"
 
 [[battery.display]]
 threshold          = 70
-symbol             = "󰂀"
+discharging_symbol = "󰂀"
+charging_symbol    = "󰢞"
 style              = "bold green"
 
 [[battery.display]]
 threshold          = 60
-symbol             = "󰁿"
+discharging_symbol = "󰁿"
+charging_symbol    = "󰂉"
 style              = "bold yellow"
 
 [[battery.display]]
 threshold          = 50
-symbol             = "󰁾"
+discharging_symbol = "󰁾"
+charging_symbol    = "󰢝"
 style              = "bold yellow"
 
 [[battery.display]]
 threshold          = 40
-symbol             = "󰁽"
+discharging_symbol = "󰁽"
+charging_symbol    = "󰂈"
 style              = "bold yellow"
 
 [[battery.display]]
 threshold          = 30
-symbol             = "󰁼"
+discharging_symbol = "󰁼"
+charging_symbol    = "󰂇"
 style              = "bold yellow"
 
 [[battery.display]]
 threshold          = 20
-symbol             = "󰁻"
+discharging_symbol = "󰁻"
+charging_symbol    = "󰂆"
 style              = "bold red"
 
 [[battery.display]]
 threshold          = 10
-symbol             = "󰁺"
+discharging_symbol = "󰁺"
+charging_symbol    = "󰢜"
 style              = "bold red"
 
 
 
 [directory]
-home_symbol      = "~"
-use_os_path_sep  = true
-truncate_to_repo = true
+home_symbol       = "~"
+use_os_path_sep   = true
+truncate_to_repo  = true
 truncation_length = 2
 truncation_symbol = '…/'
-read_only        = ' 󰉐'
-read_only_style  = 'bold red'
+read_only         = ' 󰉐'
+read_only_style   = 'bold red'
 
 
 
