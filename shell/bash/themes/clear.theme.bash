@@ -24,11 +24,7 @@
 
 ### Code:
 
-
-
 SH_THEME_PROMPT="➜ "
-
-
 
 # HACK: https://github.com/Bash-it/bash-it/blob/master/themes/base.theme.bash
 function safe_append_prompt_command {
@@ -41,15 +37,13 @@ function safe_append_prompt_command {
     esac
 
     if expr "${PROMPT_COMMAND[*]:-}" : "${prompt_re}"; then
-      return
+        return
     elif assert_string_empty "${PROMPT_COMMAND}"; then
-      PROMPT_COMMAND="${1}"
+        PROMPT_COMMAND="${1}"
     else
-      PROMPT_COMMAND="${1};${PROMPT_COMMAND}"
+        PROMPT_COMMAND="${1};${PROMPT_COMMAND}"
     fi
 }
-
-
 
 function command_prompt {
     if assert_null ${?}; then
@@ -60,7 +54,5 @@ function command_prompt {
         PS1+="${TEXT_FORMAT_BOLD}${TEXT_FORMAT_FOREGROUND_LIGHT_RED}${SH_THEME_PROMPT}${TEXT_FORMAT_NOESC_RESET} "
     fi
 }
-
-
 
 safe_append_prompt_command command_prompt
