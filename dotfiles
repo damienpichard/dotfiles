@@ -63,7 +63,7 @@ function uninstall {
 function main {
     if assert_eq ${#@} 2; then
         case ${1} in
-            i | install)   install ${2}   ;;
+            i | install)   install   ${2} ;;
             r | reinstall) reinstall ${2} ;;
             u | uninstall) uninstall ${2} ;;
             *)             print_usage    ;;

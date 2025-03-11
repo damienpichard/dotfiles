@@ -24,7 +24,7 @@
 
 ### Code:
 
-if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER homebrew); then
+if assert_eq $SYSTEM macos; then
     HOMEBREW_BIN_PATH="/opt/homebrew/bin"
     HOMEBREW_SBIN_PATH="/opt/homebrew/sbin"
     HOMEBREW_MAN_PATH="/opt/homebrew/share/man"
@@ -32,12 +32,16 @@ if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER homebrew); the
     HOMEBREW_BIN="${HOMEBREW_BIN_PATH}/brew"
 
     if assert_file_exists ${HOMEBREW_BIN}; then
-        # Add Homebrew paths to $PATH and $MANPATH
-        export PATH="${HOMEBREW_BIN_PATH}:${HOMEBREW_SBIN_PATH}:${PATH}"
-        export MANPATH="${HOMEBREW_MAN_PATH}:${MANPATH}"
+        if assert_eq ${MACOS_PACKAGE_MANAGER} homebrew; then
+            # Add Homebrew paths to $PATH and $MANPATH
+            export PATH="${HOMEBREW_BIN_PATH}:${HOMEBREW_SBIN_PATH}:${PATH}"
+            export MANPATH="${HOMEBREW_MAN_PATH}:${MANPATH}"
 
-        # Add some useful shortcuts as aliases
-        alias buuc="brew update && brew upgrade && brew cleanup"
-        alias brrc="rm -rf ${HOMEBREW_CACHE}"
+            # Add some useful shortcuts as aliases
+            alias buuc="brew update && brew upgrade && brew cleanup"
+            alias brrc="rm -rf ${HOMEBREW_CACHE}"
+        elif assert_true ${ENABLE_HOMEBREW_CASK}; then
+            alias brew="${HOMEBREW_BIN}"
+        fi
     fi
 fi
