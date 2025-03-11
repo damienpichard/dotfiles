@@ -24,31 +24,35 @@
 
 ### Code:
 
-if (assert_eq $SYSTEM macos) && (assert_eq $MACOS_PACKAGE_MANAGER macports); then
+if assert_eq ${SYSTEM} macos; then
     MACPORTS_BIN_PATH="/opt/local/bin"
     MACPORTS_SBIN_PATH="/opt/local/sbin"
     MACPORTS_MAN_PATH="/opt/local/share/man"
 
     if assert_directory_exists "${MACPORTS_BIN_PATH}"; then
-        export PATH="${MACPORTS_BIN_PATH}:${MACPORTS_SBIN_PATH}:${PATH}"
-        export MANPATH="${MACPORTS_MAN_PATH}:${PATH}"
+        if assert_eq ${MACOS_PACKAGE_MANAGER} macports; then
+            export PATH="${MACPORTS_BIN_PATH}:${MACPORTS_SBIN_PATH}:${PATH}"
+            export MANPATH="${MACPORTS_MAN_PATH}:${PATH}"
 
-        IMAGEMAGICK_PATH="/opt/local/lib/ImageMagick7/bin"
-        if assert_directory_exists ${IMAGEMAGICK_PATH}; then
-            export PATH="${IMAGEMAGICK_PATH}:${PATH}"
+            for imagemagick_version in $(seq 6 7); do
+                imagemagick_path=$(printf "/opt/local/lib/ImageMagick%s/bin" ${imagemagick_version})
+                if assert_directory_exists ${imagemagick_path}; then
+                    export PATH="${imagemagick_path}:${PATH}"
+                fi
+            done
+
+            function macports {
+                case "${1}" in
+                    info)        port info ${2} ;;
+                    f | find)    port search --name --line --regex "${2}" ;;
+                    r | remove)  sudo port uninstall ${@:2} ;;
+                    u | update)  sudo port -u upgrade outdated ;;
+                    i | install) sudo port install ${@:2} ;;
+                    c | compile) sudo port -s install ${@:2} ;;
+                    U | upgrade) sudo port selfupdate ;;
+                    *) print_error "no such command: '${1}'" ;;
+                esac
+            }
         fi
-
-        function macports {
-            case "${1}" in
-                    info)    port info ${2} ;;
-                f | find)    port search --name --line --regex "${2}" ;;
-                r | remove)  sudo port uninstall ${@:2} ;;
-                u | update)  sudo port -u upgrade outdated ;;
-                i | install) sudo port install ${@:2} ;;
-                c | compile) sudo port -s install ${@:2} ;;
-                U | upgrade) sudo port selfupdate ;;
-                *) print_error "command 'macports ${1}' does not exist" ;;
-            esac
-        }
     fi
 fi
