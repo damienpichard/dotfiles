@@ -33,43 +33,31 @@ function print_usage() {
     printf "        ${TEXT_FORMAT_NOESC_FOREGROUND_MAGENTA}uninstall${TEXT_FORMAT_NOESC_RESET} ${TEXT_FORMAT_NOESC_FOREGROUND_CYAN}[module]${TEXT_FORMAT_NOESC_RESET}        uninstall ${TEXT_FORMAT_NOESC_BOLD}dotfiles${TEXT_FORMAT_NOESC_RESET} for the specified module\n"
 }
 
-function install {
-    if assert_file_exists "${1}/makefile"; then
-        make -C "${1}" install
-    else
-        print_error "no such file or directory: '${1}'"
-        exit 1
-    fi
-}
-
-function reinstall {
-    if assert_file_exists "${1}/makefile"; then
-        make -C "${1}" reinstall
-    else
-        print_error "no such file or directory: '${1}'"
-        exit 1
-    fi
-}
-
-function uninstall {
-    if assert_file_exists "${1}/makefile"; then
-        make -C "${1}" uninstall
-    else
-        print_error "no such file or directory: '${1}'"
-        exit 1
-    fi
-}
-
 function main {
     if assert_eq ${#@} 2; then
+        module_path=$(realpath "${2}" 2> /dev/null || echo "${2}")
+        make_file="${module_path}/makefile"
+
+        if ! assert_directory_exists "${module_path}"; then
+            print_error "no such file or directory: '${2}'"
+            exit 1
+        fi
+
+        if ! assert_file_exists "${make_file}"; then
+            print_error "no such file or directory: '${2}/makefile'"
+            exit 1
+        fi
+
         case ${1} in
-            i | install)   install   ${2} ;;
-            r | reinstall) reinstall ${2} ;;
-            u | uninstall) uninstall ${2} ;;
-            *)             print_usage    ;;
+                i | install)   make -C "${module_path}" install   ;;
+                r | reinstall) make -C "${module_path}" reinstall ;;
+                u | uninstall) make -C "${module_path}" uninstall ;;
+                h | help)      print_usage ;;
+                *)             print_usage && exit 1 ;;
         esac
     else
         print_usage
+        exit 1
     fi
 }
 
