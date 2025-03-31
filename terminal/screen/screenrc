@@ -68,4 +68,4 @@ bind r source ~/.screenrc
 truecolor on
 
 # the following two lines give a two-line status, with the current window highlighted
-hardstatus alwayslastline "%{-}%{= w} %-Lw%{+b #eba0ac}%n%f %t%{-}%+Lw %= %{= w}|%{-} %{w}%Y/%m/%d %c"
+hardstatus alwayslastline "%l%?%{+b #2e3440;#d8dee9} %n %{-}%{+b #e5e9f0;#2e3440} %t%? %{-}%{#4c566a;#2e3440}%? %LW%?%{-}%= %{w}%{-} %{+b #d8dee9;#2e3440}%Y/%m/%d %c ${-}%{+b #2e3440;#d8dee9} %S%? ${-}"
