@@ -55,16 +55,37 @@ done
 
 # Check for and load available plugins.
 # NOTE: This configuration heavily relies on users creating their own external tools.
+#       To make this possible, we allow users to load — at their own risks — plugins
+#       from GitHub.
+#       Plugins then need to be specified as `github_account/plugin_name`.
 for plugin in ${SH_PLUGINS[*]}; do
-    if assert_file_exists "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"; then
-        source "$SH_DIR/custom/plugins/${plugin}/${plugin}.plugin.bash"
-    elif assert_file_exists "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"; then
-        source "$SH_DIR/plugins/${plugin}/${plugin}.plugin.bash"
+    if assert_file_exists "${SH_DIR}/custom/plugins/${plugin}/${plugin}.plugin.bash"; then
+        source "${SH_DIR}/custom/plugins/${plugin}/${plugin}.plugin.bash"
+    elif assert_file_exists "${SH_DIR}/plugins/${plugin}/${plugin}.plugin.bash"; then
+        source "${SH_DIR}/plugins/${plugin}/${plugin}.plugin.bash"
+    else
+      plugin_name=$(echo ${plugin} | cut -f 2 -d '/')
+      plugin_home=$(printf "https://github.com/%s" ${plugin})
+      plugin_link=$(printf "https://github.com/%s.git" ${plugin})
+
+      # Check if URL exists
+      if $(curl --fail ${plugin_home} &>/dev/null); then
+        git clone ${plugin_link} ${SH_DIR}/custom/plugins/${plugin_name}
+
+        if assert_file_exists ${SH_DIR}/custom/plugins/${plugin_name}/${plugin_name}.plugin.bash; then
+          source ${SH_DIR}/custom/plugins/${plugin_name}/${plugin_name}.plugin.bash
+        else
+          print_warning "unsupported plugin: '${plugin}'"
+          rm -rf ${SH_DIR}/custom/plugins/${plugin_name}
+        fi
+      else
+        print_warning "no such plugin: '${plugin}'"
+      fi
     fi
 done
 
 # Load all the *.bash configuration file in utils/
-for util in $SH_DIR/utils/*.util.bash; do
+for util in ${SH_DIR}/utils/*.util.bash; do
     if assert_file_exists "${util}"; then
         source "${util}"
     fi
